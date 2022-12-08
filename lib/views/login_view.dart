@@ -249,23 +249,9 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
         onPressed: () async {
-          // Validate returns true if the form is valid, or false otherwise.
-          // if (_formKey.currentState!.validate()) {
-          //   String userName = nameController.text.trim();
-          //   String password = passwordController.text.trim();
-
-          //   print("Before encode: " + password);
-          //   print("Before encode: " + userName);
-
-          //   String passwordEncode = loginController.generateMd5(password);
-          //   String userNameEnCode = loginController.generateMd5(userName);
-
-          //   print("After encode: " + passwordEncode);
-          //   print("After encode: " + userNameEnCode);
+          Get.find<AuthController>().login(nameController.text, passwordController.text);
           Get.offAllNamed(Routes.getControlViewPage());
         },
-        // },
-        // },
         child: Text(AppLocalizations.of(context)!.login),
       ),
     );
