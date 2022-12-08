@@ -6,4 +6,12 @@ class AppConstants {
   static const String baseUrlSever = 'http://devteam.click:5052';
   static const String getProducts = '/api/products';
   static const String page_size = "30";
+  static const TOKEN = "DBtoken";
+  static const String USER_URL = "/user";
+  static const String BASE_URL = 'https://fakestoreapi.com';
+  static const String LOGIN_URL = '/auth/login';
+  static const String ID_USER = "id_user";
+  static const String USER_NAME = "USERNAME";  
+  static const String PASSWORD = "PASSWORD";
+  
 }
