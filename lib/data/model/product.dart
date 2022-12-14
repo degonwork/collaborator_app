@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-final String tableProduct = 'products';
+const String tableProduct = 'products';
 
 class ProductField {
   static final List<String> values = [
@@ -16,17 +16,17 @@ class ProductField {
     updatedAt,
     weight,
   ];
-  static final String id = 'id';
-  static final String code = 'code';
-  static final String commentsCount = 'comments_count';
-  static final String createdAt = 'created_at';
-  static final String imageUrls = 'image_urls';
-  static final String name = 'name';
-  static final String price = 'price';
-  static final String slug = 'slug';
-  static final String stock = 'stock';
-  static final String updatedAt = 'updated_at';
-  static final String weight = 'weight';
+  static const String id = 'id';
+  static const String code = 'code';
+  static const String commentsCount = 'comments_count';
+  static const String createdAt = 'created_at';
+  static const String imageUrls = 'image_urls';
+  static const String name = 'name';
+  static const String price = 'price';
+  static const String slug = 'slug';
+  static const String stock = 'stock';
+  static const String updatedAt = 'updated_at';
+  static const String weight = 'weight';
 }
 
 class Product {

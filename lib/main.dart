@@ -7,9 +7,9 @@ import 'package:collaborator_app/bindings/start_bindings.dart'
     as start_bindings;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'l10n/l10n.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
  await start_bindings.dependencies();
  
   runApp(const MyApp());

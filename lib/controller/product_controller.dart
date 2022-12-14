@@ -32,7 +32,7 @@ class ProductController extends GetxController {
   Future<List<Product>> getProducts({required String? page}) async {
     List<Product> listProducts = [];
     Response response = await productRepo.getProducts(
-        pageQuery: {"page": page, "page_size": AppConstants.page_size});
+        pageQuery: {"page": page, "page_size": AppConstants.pageSize});
     if (response.statusCode == 200) {
       Map<String, dynamic> result =
           Map<String, dynamic>.from(jsonDecode(jsonEncode(response.body)));
@@ -76,7 +76,7 @@ class ProductController extends GetxController {
     List<Product>? listProducts = await productRepo.readAllProductFromDB();
     listProducts != null
         ? _currentPage =
-            (listProducts.length ~/ int.parse(AppConstants.page_size))
+            (listProducts.length ~/ int.parse(AppConstants.pageSize))
                 .toString()
         : _currentPage = "1";
     await createProductToDB(page: nextPage ?? _currentPage);

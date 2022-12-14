@@ -15,13 +15,13 @@ class OrderByView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => CheckOutController());
-    TextEditingController _customerNameController = TextEditingController();
-    TextEditingController _phoneNumberController = TextEditingController();
-    TextEditingController _provinceController = TextEditingController();
-    TextEditingController _districtController = TextEditingController();
-    TextEditingController _wardController = TextEditingController();
-    TextEditingController _villageController = TextEditingController();
-    TextEditingController _billCodeController = TextEditingController();
+    TextEditingController customerNameController = TextEditingController();
+    TextEditingController phoneNumberController = TextEditingController();
+    TextEditingController provinceController = TextEditingController();
+    TextEditingController districtController = TextEditingController();
+    TextEditingController wardController = TextEditingController();
+    TextEditingController villageController = TextEditingController();
+    TextEditingController billCodeController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -59,7 +59,7 @@ class OrderByView extends StatelessWidget {
                       ? Padding(
                           padding: const EdgeInsets.all(16),
                           child: TextField(
-                              controller: _billCodeController,
+                              controller: billCodeController,
                               decoration: InputDecoration(
                                 hintText: AppLocalizations.of(context)!
                                     .textFieldBillCode,
@@ -95,7 +95,7 @@ class OrderByView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: TextField(
-                                  controller: _customerNameController,
+                                  controller: customerNameController,
                                   decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
                                         .customerName,
@@ -111,7 +111,7 @@ class OrderByView extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: TextField(
-                                  controller: _phoneNumberController,
+                                  controller: phoneNumberController,
                                   decoration: InputDecoration(
                                     hintText: AppLocalizations.of(context)!
                                         .phoneNumber,
@@ -125,10 +125,10 @@ class OrderByView extends StatelessWidget {
                             ),
                             const SizedBox(height: 5),
                             SelectAddress(
-                              provinceController: _provinceController,
-                              districtController: _districtController,
-                              wardController: _wardController,
-                              villageController: _villageController,
+                              provinceController: provinceController,
+                              districtController: districtController,
+                              wardController: wardController,
+                              villageController: villageController,
                               distance: 5,
                             ),
                             Row(
@@ -169,42 +169,42 @@ class OrderByView extends StatelessWidget {
                     } else if (Get.find<CheckOutController>()
                             .selectTypeDelivery ==
                         'address') {
-                      if (_customerNameController.text.trim().isEmpty) {
+                      if (customerNameController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.errorCustomerName,
                           AppLocalizations.of(context)!.enterCustomerName,
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                      } else if (_phoneNumberController.text.trim().isEmpty) {
+                      } else if (phoneNumberController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.errorphoneCustomer,
                           AppLocalizations.of(context)!.enterPhoneCustomer,
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                      } else if (_provinceController.text.trim().isEmpty) {
+                      } else if (provinceController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.notSelectProvinceOne,
                           AppLocalizations.of(context)!.notSelectProvinceTwo,
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                      } else if (_districtController.text.trim().isEmpty) {
+                      } else if (districtController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.notSelectDistrictOne,
                           AppLocalizations.of(context)!.notSelectDistrictTwo,
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                      } else if (_wardController.text.trim().isEmpty) {
+                      } else if (wardController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.notSelectWardOne,
                           AppLocalizations.of(context)!.notSelectWardTwo,
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                      } else if (_villageController.text.trim().isEmpty) {
+                      } else if (villageController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.notSelectVillageOne,
                           AppLocalizations.of(context)!.notSelectVillageOne,
@@ -219,10 +219,10 @@ class OrderByView extends StatelessWidget {
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                        _provinceController.text = "";
-                        _districtController.text = "";
-                        _wardController.text = "";
-                        _villageController.text = "";
+                        provinceController.text = "";
+                        districtController.text = "";
+                        wardController.text = "";
+                        villageController.text = "";
                         Get.find<AddressController>().isEnableDistrictText =
                             false;
                         Get.find<AddressController>().isEnableWardText = false;
@@ -236,9 +236,9 @@ class OrderByView extends StatelessWidget {
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                        _districtController.text = "";
-                        _wardController.text = "";
-                        _villageController.text = "";
+                        districtController.text = "";
+                        wardController.text = "";
+                        villageController.text = "";
                         Get.find<AddressController>().isEnableWardText = false;
                         Get.find<AddressController>().isEnableVillageText =
                             false;
@@ -250,16 +250,16 @@ class OrderByView extends StatelessWidget {
                           backgroundColor: Colors.red,
                           colorText: Colors.white,
                         );
-                        _wardController.text = "";
-                        _villageController.text = "";
+                        wardController.text = "";
+                        villageController.text = "";
                         Get.find<AddressController>().isEnableVillageText =
                             false;
                       } else {
                         orderController.query = {
-                          'address': _villageController.text,
-                          'ward': _wardController.text,
-                          'district': _districtController.text,
-                          'province': _provinceController.text,
+                          'address': villageController.text,
+                          'ward': wardController.text,
+                          'district': districtController.text,
+                          'province': provinceController.text,
                           "pick_province": "Hà Nội",
                           "pick_district": "Thanh Xuân",
                           "weight": "${Get.find<CartController>().totalWeight}",
@@ -269,21 +269,21 @@ class OrderByView extends StatelessWidget {
                               Get.find<CheckOutController>().selectXfast,
                         };
                         orderController.customerName =
-                            _customerNameController.text;
+                            customerNameController.text;
                         orderController.phoneCustomer =
-                            _phoneNumberController.text;
+                            phoneNumberController.text;
                         orderController.addressCustomer =
-                            "${_villageController.text}, "
-                            "${_wardController.text}, "
-                            "${_districtController.text}, "
-                            "${_provinceController.text}";
+                            "${villageController.text}, "
+                            "${wardController.text}, "
+                            "${districtController.text}, "
+                            "${provinceController.text}";
                         await orderController.createAnOrder();
                         Get.offAllNamed(Routes.getControlViewPage());
                       }
                     } else if (Get.find<CheckOutController>()
                             .selectTypeDelivery ==
                         'billCode') {
-                      if (_billCodeController.text.trim().isEmpty) {
+                      if (billCodeController.text.trim().isEmpty) {
                         Get.snackbar(
                           AppLocalizations.of(context)!.notEnterBillCodeOne,
                           AppLocalizations.of(context)!.notEnterBillCodeTwo,
@@ -293,7 +293,7 @@ class OrderByView extends StatelessWidget {
                       } else {
                         Get.toNamed(Routes.getControlViewPage());
                         orderController
-                            .getStatusOrder(_billCodeController.text.trim());
+                            .getStatusOrder(billCodeController.text.trim());
                       }
                     }
                   },
