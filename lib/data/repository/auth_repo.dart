@@ -9,23 +9,23 @@ class AuthRepo{
   final SharedPreferences sharedPreferences;
   AuthRepo({required this.apiClient, required this.sharedPreferences});
   Future<Response> signUp(User signUpBody) async{
-    return await apiClient.postData(AppConstants.USER_URL, signUpBody.toJson());
+    return await apiClient.postData(AppConstants.userUrl, signUpBody.toJson());
   }
   Future<Response> login(String userName, String password) async{
-    return await apiClient.postData(AppConstants.LOGIN_URL, {"username" : userName, "password": password});
+    return await apiClient.postData(AppConstants.loginUrl, {"username" : userName, "password": password});
   }
   Future<bool> saveUserName(String id) async {
-    return await sharedPreferences.setString(AppConstants.ID_USER,id);
+    return await sharedPreferences.setString(AppConstants.idUser,id);
   }
   Future<bool> saveUserToken(String token)async{
     apiClient.token = token;
     // apiClient.updateHeader(token);
-    return await sharedPreferences.setString(AppConstants.TOKEN, token);
+    return await sharedPreferences.setString(AppConstants.token, token);
   }
   Future<void> saveUserNameAndPassword(String userName, String password)async{
     try {
-      await sharedPreferences.setString(AppConstants.USER_NAME, userName);
-      await sharedPreferences.setString(AppConstants.PASSWORD, password);
+      await sharedPreferences.setString(AppConstants.username, userName);
+      await sharedPreferences.setString(AppConstants.password, password);
     } catch (e) {
       rethrow;
     }

@@ -1,4 +1,4 @@
-final String tableOrder = 'orders';
+const String tableOrder = 'orders';
 
 class OrderField {
   static final List<String> values = [
@@ -13,16 +13,16 @@ class OrderField {
     transportCode,
     statusOrder
   ];
-  static final String id = 'id';
-  static final String userId = 'userId';
-  static final String totalPrice = 'totalPrice';
-  static final String transportFee = 'transportFee';
-  static final String time = 'time';
-  static final String customerName = 'customerName';
-  static final String phoneCustomer = 'phoneCustomer';
-  static final String addressCustomer = 'addressCustomer';
-  static final String transportCode = 'transportCode';
-  static final String statusOrder = 'statusOrder';
+  static const String id = 'id';
+  static const String userId = 'userId';
+  static const String totalPrice = 'totalPrice';
+  static const String transportFee = 'transportFee';
+  static const String time = 'time';
+  static const String customerName = 'customerName';
+  static const String phoneCustomer = 'phoneCustomer';
+  static const String addressCustomer = 'addressCustomer';
+  static const String transportCode = 'transportCode';
+  static const String statusOrder = 'statusOrder';
 }
 
 class Order {

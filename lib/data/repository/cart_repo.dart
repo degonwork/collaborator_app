@@ -4,13 +4,11 @@ import '../provider/db/storage_database.dart';
 class CartRepo {
   Future<void> createCartToDB({List<Cart>? carts}) async {
     for (int i = 0; i < carts!.length; i++) {
-      if (carts[i] is Cart) {
         Cart? cart;
         cart = await readCartByIDFromDB(id: carts[i].id);
         if (cart == null) {
           await StorageDatabase.instance.createCartToDB(carts[i]);
         }
-      }
     }
   }
 

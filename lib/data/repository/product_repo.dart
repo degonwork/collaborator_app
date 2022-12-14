@@ -1,26 +1,24 @@
+import 'package:collaborator_app/data/provider/api/api_client.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 
 import '../../config/app_constants.dart';
 import '../model/product.dart';
-import '../provider/api/api_server.dart';
 import '../provider/db/storage_database.dart';
 
 class ProductRepo {
-  final ApiServer apiServer;
+  final ApiClient apiClient;
 
-  ProductRepo({required this.apiServer});
+  ProductRepo({required this.apiClient});
   Future<Response> getProducts({Map<String, dynamic>? pageQuery}) async {
-    return await apiServer.getData(AppConstants.getProducts, query: pageQuery);
+    return await apiClient.getData(AppConstants.getProducts, query: pageQuery);
   }
 
   Future<void> createProductToDB({List<Product>? products}) async {
     for (int i = 0; i < products!.length; i++) {
-      if (products[i] is Product) {
         Product? product;
         product = await readProductByIDFromDB(id: products[i].id);
         if (product == null) {
           await StorageDatabase.instance.createProductToDB(products[i]);
-        }
       }
     }
   }

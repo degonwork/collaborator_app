@@ -1,11 +1,11 @@
-final String tableProvinces = 'provinces';
+const String tableProvinces = 'provinces';
 
 class ProvinceField {
   static final List<String> values = [provinceId, name, slug, type];
-  static final String provinceId = 'provinceId';
-  static final String name = 'name';
-  static final String slug = 'slug';
-  static final String type = 'type';
+  static const String provinceId = 'provinceId';
+  static const String name = 'name';
+  static const String slug = 'slug';
+  static const String type = 'type';
 }
 
 class Province {
@@ -50,9 +50,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
+      reverseMap = map.map((k, v) =>  MapEntry(v, k));
     return reverseMap!;
   }
 }

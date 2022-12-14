@@ -1,4 +1,4 @@
-final String tableDistrict = 'district';
+ const String tableDistrict = 'district';
 
 class DistrictField {
   static final List<String> values = [
@@ -7,14 +7,14 @@ class DistrictField {
     slug,
     path,
     districtId,
-    parent_id
+    parentId
   ];
-  static final String name = 'name';
-  static final String type = 'type';
-  static final String slug = 'slug';
-  static final String path = 'path';
-  static final String districtId = 'districtId';
-  static final String parent_id = 'parent_id';
+  static const String name = 'name';
+  static const String type = 'type';
+  static const String slug = 'slug';
+  static const String path = 'path';
+  static const String districtId = 'districtId';
+  static const String parentId = 'parent_id';
 }
 
 class District {
@@ -24,7 +24,7 @@ class District {
     required this.slug,
     required this.path,
     required this.districtId,
-    required this.parent_id,
+    required this.parentId,
   });
 
   final String? name;
@@ -32,7 +32,7 @@ class District {
   final String? slug;
   final String? path;
   final String? districtId;
-  final String? parent_id;
+  final String? parentId;
 
   static District fromJson(Map<String, dynamic> json) => District(
         name: json["name"],
@@ -40,7 +40,7 @@ class District {
         slug: json["slug"],
         path: json["path"],
         districtId: json["code"] ?? json["districtId"],
-        parent_id: json["parent_code"] ?? json["parent_id"],
+        parentId: json["parent_code"] ?? json["parent_id"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +49,7 @@ class District {
         "slug": slug,
         "path": path,
         "districtId": districtId,
-        "parent_id": parent_id,
+        "parent_id": parentId,
       };
 }
 
@@ -74,9 +74,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
+    reverseMap = map.map((k, v) =>  MapEntry(v, k));
     return reverseMap!;
   }
 }

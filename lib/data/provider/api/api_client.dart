@@ -1,17 +1,16 @@
 import 'package:collaborator_app/config/app_constants.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class ApiClient extends GetConnect {
   late String token;
-  final String baseUrl;
+  final String baseurl;
   final SharedPreferences sharedPreferences;
   late Map<String, String>? header;
-  ApiClient({required this.baseUrl, required this.sharedPreferences}){
+  ApiClient({required this.baseurl, required this.sharedPreferences}){
     baseUrl = baseUrl;
-    timeout = Duration(seconds: 30);
+    timeout = const Duration(seconds: 30);
     defaultContentType = 'application/json; charset=utf-8';
-    token = sharedPreferences.getString(AppConstants.TOKEN) ?? "";
+    token = sharedPreferences.getString(AppConstants.token) ?? "";
     // _mainHeader = {
     //   // 'Content-Type':'application/json; charset=UTF -8',
     //   // 'Authorization':'Bearer $token',
@@ -24,9 +23,9 @@ class ApiClient extends GetConnect {
 //   };
 // }
 // request to get data
-Future<Response> getData(String uri, Map<String, String>? headers) async {
+Future<Response> getData(String uri, {Map<String, dynamic>? query, Map<String, String>? headers} ) async {
   try {
-    Response response = await get(uri,headers: headers);
+    Response response = await get(uri,headers: headers,query:query );
     return response;
   } catch (e) {
     return Response(statusCode: 1,statusText: e.toString());
@@ -59,4 +58,5 @@ Future<Response> deleteData(String uri) async{
     return Response(statusCode: 1, statusText: e.toString());
   }
 }
+
 }
