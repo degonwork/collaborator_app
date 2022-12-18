@@ -200,7 +200,7 @@
   "@titleEconomicalDelivery": {
     "description": "Title of Economical Delivery"
   },
-  "titleFastDelivery": "Economical delivery",
+  "titleFastDelivery": "Fast delivery",
   "@titleFastDelivery": {
     "description": "Title of Fast Delivery"
   },

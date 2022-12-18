@@ -33,23 +33,27 @@ class ProductController extends GetxController {
     List<Product> listProducts = [];
     Response response = await productRepo.getProducts(
         pageQuery: {"page": page, "page_size": AppConstants.page_size});
-    if (response.statusCode == 200) {
-      Map<String, dynamic> result =
-          Map<String, dynamic>.from(jsonDecode(jsonEncode(response.body)));
-      if (result["success"] == true) {
-        print("got products");
-        _nextPage = result['page_meta']['next_page_number'].toString();
-        if (result['page_meta']['has_next_page'] == false) {
-          _isNotHasData = true;
-        }
-        for (var element in result["products"]) {
-          listProducts.add(Product.fromJson(element));
-        }
-      } else {
-        print("Not got products");
-      }
-    } else {
-      print("error");
+    // if (response.statusCode == 200) {
+    // Map<String, dynamic> result =
+    //     Map<String, dynamic>.from(jsonDecode(jsonEncode(response.body)));
+    List<dynamic> result =
+        List<dynamic>.from(jsonDecode(jsonEncode(response.body)));
+    // if (result["success"] == true) {
+    //   print("got products");
+    //   _nextPage = result['page_meta']['next_page_number'].toString();
+    //   if (result['page_meta']['has_next_page'] == false) {
+    //     _isNotHasData = true;
+    //   }
+    // for (var element in result["products"]) {
+    //   listProducts.add(Product.fromJson(element));
+    for (var element in result) {
+      listProducts.add(Product.fromJson(element));
+      // }
+      // } else {
+      //   print("Not got products");
+      // }
+      // } else {
+      //   print("error");
     }
     return listProducts;
   }
@@ -59,15 +63,6 @@ class ProductController extends GetxController {
     if (listProducts.isNotEmpty) {
       await productRepo.createProductToDB(products: listProducts);
       print("Create product to DB");
-    }
-  }
-
-  Future<Product?> readProductByIdFromDB(int? id) async {
-    Product? product = await productRepo.readProductByIDFromDB(id: id);
-    if (product != null) {
-      return product;
-    } else {
-      return null;
     }
   }
 

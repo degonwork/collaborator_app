@@ -68,12 +68,12 @@ class _OrderViewState extends State<OrderView> with TickerProviderStateMixin {
                   child: TabBarView(
                     controller: tabController,
                     children: [
-                      orderController.orders.isNotEmpty
-                          ? orderController.isLoading
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
-                                )
-                              : ListView.builder(
+                      orderController.isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : orderController.orders.isNotEmpty
+                              ? ListView.builder(
                                   itemCount: orderController.orders.length,
                                   itemBuilder: (context, index) =>
                                       GestureDetector(
@@ -189,28 +189,28 @@ class _OrderViewState extends State<OrderView> with TickerProviderStateMixin {
                                     ),
                                   ),
                                 )
-                          : Padding(
-                              padding: const EdgeInsets.only(bottom: 200),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/empty_order.png',
-                                    height: 300,
-                                    width: 300,
+                              : Padding(
+                                  padding: const EdgeInsets.only(bottom: 200),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/empty_order.png',
+                                        height: 300,
+                                        width: 300,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      Text(
+                                        AppLocalizations.of(context)!
+                                            .textEmptyOrder,
+                                        style: const TextStyle(
+                                          fontSize: 32,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    AppLocalizations.of(context)!
-                                        .textEmptyOrder,
-                                    style: const TextStyle(
-                                      fontSize: 32,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
+                                ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 200),
                         child: Column(

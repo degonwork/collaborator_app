@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import '../data/model/cart.dart';
 import '../data/model/order.dart';
 import '../data/model/transport_fee.dart';
+import '../data/repository/cart_repo.dart';
 import '../data/repository/order_repo.dart';
 
 class OrderController extends GetxController {
   final OrderRepo orderRepo;
+  final CartRepo cartRepo;
 
   List<Order> _orders = [];
   List<Order> get orders => _orders;
@@ -61,6 +63,7 @@ class OrderController extends GetxController {
 
   OrderController({
     required this.orderRepo,
+    required this.cartRepo,
   });
 
   // Server GHTK
@@ -123,17 +126,16 @@ class OrderController extends GetxController {
   }
 
   Future<void> updateListCartIsNotExist() async {
-    List<Cart>? listCarts =
-        await Get.find<CartController>().readAllCartIsNotExitedFromDB();
+    List<Cart>? listCarts = await cartRepo.readAllCartIsNotExistedFromDB();
     if (listCarts != null) {
       for (var cart in listCarts) {
         cart.isExisted = true;
-        await Get.find<CartController>().updateCartToDB(cart);
+        await cartRepo.updateCartToDB(cart);
       }
     }
   }
 
-  Future<List<Order>?> readAllOrderFromDB() async {
+  Future<void> readAllOrderFromDB() async {
     _isLoading = true;
     _mapListCart = {};
     List<Order>? listOrders = await orderRepo.readAllOrderFromDB();
@@ -141,17 +143,14 @@ class OrderController extends GetxController {
       _orders = [];
       for (Order order in listOrders) {
         _orders.add(order);
-        List<Cart>? listCart = await Get.find<CartController>()
-            .readAllCartByOrderIdFromDB(order.id!);
+        List<Cart>? listCart =
+            await cartRepo.readAllCartByOrderIdFromDB(order.id!);
         _mapListCart.putIfAbsent(order.id!, () => listCart);
       }
       getProductFromOrder();
-      _isLoading = false;
-      update();
-      return listOrders;
-    } else {
-      return null;
     }
+    _isLoading = false;
+    update();
   }
 
   void changeColor(int index) {
