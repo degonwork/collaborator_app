@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-final String tableCart = 'carts';
+const String tableCart = 'carts';
 
 class CartField {
   static final List<String> values = [
@@ -13,14 +13,14 @@ class CartField {
     quantity,
     isExisted,
   ];
-  static final String id = 'id';
-  static final String productId = 'productId';
-  static final String orderId = 'orderId';
-  static final String productName = 'productName';
-  static final String productImage = 'productImage';
-  static final String unitPrice = 'unitPrice';
-  static final String quantity = 'quantity';
-  static final String isExisted = 'isExisted';
+  static const String id = 'id';
+  static const String productId = 'productId';
+  static const String orderId = 'orderId';
+  static const String productName = 'productName';
+  static const String productImage = 'productImage';
+  static const String unitPrice = 'unitPrice';
+  static const String quantity = 'quantity';
+  static const String isExisted = 'isExisted';
 }
 
 class Cart {

@@ -76,7 +76,7 @@ class OrderController extends GetxController {
       if (result['success'] == true) {
         _transportFee = TransportFee.fromJson(result);
         print('got transport fee');
-        print('------------------------' + _transportFee!.fee!.fee.toString());
+        print("------------------------ ${transportFee!.fee!.fee}");
       } else {
         print("Not got transport Free");
       }
@@ -87,7 +87,7 @@ class OrderController extends GetxController {
   }
 
   Future<void> getStatusOrder(String orderNumber) async {
-    print('orderNumber: ' + orderNumber);
+    print("orderNumber: $orderNumber");
     Response response = await orderRepo.getOrderStatus(orderNumber);
     print(response);
     if (response.statusCode == 200) {
@@ -99,7 +99,7 @@ class OrderController extends GetxController {
 
   // Database
   Future<void> createOrderToDB() async {
-    int? maxId;
+    // int? maxId;
     Order order = Order(
       id: Get.find<CartController>().orderId,
       userId: 1,

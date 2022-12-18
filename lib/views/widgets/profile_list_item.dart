@@ -14,9 +14,9 @@ class ProfileListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding:const EdgeInsets.symmetric(horizontal: 15),
       height: 55,
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal:15,
       ).copyWith(bottom:20),
       decoration: BoxDecoration(
@@ -29,14 +29,14 @@ class ProfileListItem extends StatelessWidget {
             icon,
             size: 35,
           ),
-          SizedBox(width: 15,),
+  const   SizedBox(width: 15,),
           Text(
             text,
             style: kTextTitleStyle.copyWith(fontWeight: FontWeight.w500),
           ),
   const   Spacer(),
           if(hasNavigation)
-          Icon(LineAwesomeIcons.angle_right,
+  const   Icon(LineAwesomeIcons.angle_right,
           size: 25,
           ),
         ],
