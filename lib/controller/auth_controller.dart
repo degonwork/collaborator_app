@@ -1,10 +1,12 @@
 import 'dart:convert';
-// import 'package:collaborator_app/data/model/user.dart';
-// import 'package:collaborator_app/data/model/user.dart';
+
+
 import 'package:collaborator_app/data/repository/auth_repo.dart';
+import 'package:collaborator_app/views/login_view.dart';
 import 'package:crypto/crypto.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:http/http.dart' ;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class AuthController extends GetxController {
@@ -43,7 +45,7 @@ Future<void> signUp(String email, String password) async {
       print('failed');
     }
   } catch (e) {
-    print(e.toString());
+    // print(e.toString());
   }
 }
 
@@ -61,8 +63,14 @@ Future<void> login(String email, String password) async {
       print('failed');
     }
   } catch (e) {
-    print(e.toString());
+    // print(e.toString());
   }
+}
+Future<void> logOut() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.clear();
+  print(prefs.clear());
+  Get.offAll(() => const LoginView());
 }
 Future<void> createInforUser(String userName, String job) async{
   try {
@@ -77,7 +85,7 @@ Future<void> createInforUser(String userName, String job) async{
       print('failed');
     }
   } catch (e) {
-    print(e.toString());
+    // print(e.toString());
   }
 }
 // Future<void> login(String userName, String password) async{

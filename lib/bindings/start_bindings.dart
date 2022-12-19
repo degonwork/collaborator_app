@@ -13,8 +13,8 @@ Future<void> dependencies() async{
   Get.lazyPut(() => sharedPreferences,fenix: true);
   Get.lazyPut(() => ApiClient(baseurl: AppConstants.baseUrl, sharedPreferences: Get.find()));
   Get.lazyPut(() => ApiGHTK(baseUrlGHTK: AppConstants.baseUrlGHTK));
-  Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+  Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()),fenix: true);
   Get.lazyPut(() => ProductRepo(apiClient: Get.find()));
-  Get.lazyPut(() => AuthController(authRepo: Get.find()));
+  Get.lazyPut(() => AuthController(authRepo:Get.find()));
   Get.lazyPut(() => ProductController(productRepo: Get.find()));
 }

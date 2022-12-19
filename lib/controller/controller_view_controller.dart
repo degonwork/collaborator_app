@@ -1,3 +1,4 @@
+import 'package:collaborator_app/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../views/cart_view.dart';
@@ -23,7 +24,7 @@ class ControlViewController extends GetxController {
         _currentScreen = const OrderView();
         break;
       case 3:
-        _currentScreen = const ProfileView();
+        _currentScreen =  const ProfileView();
         break;
     }
     update();
