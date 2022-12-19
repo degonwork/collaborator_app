@@ -49,7 +49,7 @@ class ProductController extends GetxController {
         print("Not got products");
       }
     } else {
-      print("error");
+      // print("error");
     }
     return listProducts;
   }
@@ -80,13 +80,13 @@ class ProductController extends GetxController {
                 .toString()
         : _currentPage = "1";
     await createProductToDB(page: nextPage ?? _currentPage);
-    List<Product>? storageProducts = await productRepo.readAllProductFromDB();
-    _products = [];
-    for (var product in storageProducts!) {
-      _products.add(product);
-    }
-    _isLoading = false;
-    update();
+    // List<Product>? storageProducts = await productRepo.readAllProductFromDB();
+    // _products = [];
+    // for (var product in listProducts!) {
+    //   _products.add(product);
+    // }
+    // _isLoading = false;
+    // update();
   }
 
   Future<void> noFilterProduct() async {
@@ -94,7 +94,7 @@ class ProductController extends GetxController {
     List<Product>? listProducts = await productRepo.readAllProductFromDB();
     _products = [];
 
-    for (var product in listProducts!) {
+    for (var product in listProducts! ) {
       _products.add(product);
     }
     _isFilter = false;

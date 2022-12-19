@@ -251,7 +251,7 @@ class _LoginViewState extends State<LoginView> {
         onPressed: () async {
           authController.login(emailController.text.toString(), passwordController.text.toString());
           // Get.find<AuthController>().login(nameController.text, passwordController.text);
-          // Get.offAllNamed(Routes.getControlViewPage());
+          Get.offAllNamed(Routes.getControlViewPage());
         },
         child: Text(AppLocalizations.of(context)!.login),
       ),

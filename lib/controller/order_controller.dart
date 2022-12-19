@@ -78,7 +78,7 @@ class OrderController extends GetxController {
         print("Not got transport Free");
       }
     } else {
-      print("error");
+      // print("error");
     }
     update();
   }
