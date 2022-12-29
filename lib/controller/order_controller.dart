@@ -135,7 +135,8 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<void> readAllOrderFromDB() async {
+  Future<List<Order>?> readAllOrderFromDB() async {
+    print("----------------");
     _isLoading = true;
     _mapListCart = {};
     List<Order>? listOrders = await orderRepo.readAllOrderFromDB();
@@ -151,6 +152,7 @@ class OrderController extends GetxController {
     }
     _isLoading = false;
     update();
+    return listOrders;
   }
 
   void changeColor(int index) {

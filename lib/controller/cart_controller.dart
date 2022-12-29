@@ -1,16 +1,15 @@
+import 'package:collaborator_app/controller/order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../data/model/cart.dart';
 import '../data/model/order.dart';
 import '../data/model/product.dart';
 import '../data/repository/cart_repo.dart';
-import '../data/repository/order_repo.dart';
 import '../data/repository/product_repo.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
   final ProductRepo productRepo;
-  final OrderRepo orderRepo;
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
@@ -30,7 +29,6 @@ class CartController extends GetxController {
   CartController({
     required this.cartRepo,
     required this.productRepo,
-    required this.orderRepo,
   });
 
   Future<bool> addToCart(Product product) async {
@@ -152,7 +150,8 @@ class CartController extends GetxController {
   }
 
   Future<void> getOrderIdFromDB() async {
-    List<Order>? listOrders = await orderRepo.readAllOrderFromDB();
+    List<Order>? listOrders =
+        await Get.find<OrderController>().readAllOrderFromDB();
     if (listOrders != null) {
       listOrders.sort((a, b) => a.id! - b.id!);
       _orderId = listOrders.last.id! + 1;

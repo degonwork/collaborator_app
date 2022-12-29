@@ -268,7 +268,7 @@ class _SignUpViewState extends State<SignUpView> {
         ),
         onPressed: () {
           authController.signUp(emailController.text, passwordController.text);
-          Get.off(() =>  const CreateUserView());
+          Get.off(() => const CreateUserView());
           // Validate returns true if the form is valid, or false otherwise.
           // if (_formKey.currentState!.validate()) {
           //   // ... Navigate To your Home Page

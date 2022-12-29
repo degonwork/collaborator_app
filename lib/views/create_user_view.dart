@@ -14,13 +14,14 @@ class CreateUserView extends StatefulWidget {
 class _CreateUserViewState extends State<CreateUserView> {
   TextEditingController nameController = TextEditingController();
   TextEditingController jobController = TextEditingController();
-  final  _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   @override
-  void dispose(){
-   nameController.dispose();
-   jobController.dispose();
-   super.dispose();
+  void dispose() {
+    nameController.dispose();
+    jobController.dispose();
+    super.dispose();
   }
+
   AuthController authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
@@ -33,54 +34,55 @@ class _CreateUserViewState extends State<CreateUserView> {
             child: const Center(
               child: Text(
                 'Thiết lập tài khoản của bạn',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          style: kTextFormFieldStyle(),
-                          decoration: const InputDecoration(
-                            prefixIcon:  Icon(Icons.person),
-                            hintText: 'User Name',
-                            border:  OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            ),
-                          ),
-                          controller: nameController,
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      style: kTextFormFieldStyle(),
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        hintText: 'User Name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
-                const   SizedBox(height: 20,),
-                        TextFormField(
-                          style: kTextFormFieldStyle(),
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.percent),
-                            hintText: 'Address',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                            ),
-                          ),
-                          controller: jobController,
-                        ),
-               const    SizedBox(height: 30,),
-                        ElevatedButton(
-                          onPressed: (){
-                            authController.createInforUser(nameController.text,jobController.text);
-                          },
-                          child: const Center(
-                            child: Text('Hoàn thành'),
-                          ),
-                          )
-                      ],
-                    )
+                      ),
+                      controller: nameController,
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      style: kTextFormFieldStyle(),
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.percent),
+                        hintText: 'Address',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                        ),
+                      ),
+                      controller: jobController,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        authController.createInforUser(
+                            nameController.text, jobController.text);
+                      },
+                      child: const Center(
+                        child: Text('Hoàn thành'),
+                      ),
+                    )
+                  ],
+                )),
           ),
         ],
       ),
