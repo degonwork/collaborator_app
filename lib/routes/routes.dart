@@ -1,3 +1,4 @@
+import 'package:collaborator_app/views/create_user_view.dart';
 import 'package:get/get.dart';
 import '../views/address_view.dart';
 import '../views/cart_view.dart';
@@ -13,6 +14,7 @@ import '../views/signup_view.dart';
 class Routes {
   static const String login = '/login';
   static const String signUp = '/signUp';
+  static const String createUser = '/createUser';
   static const String address = '/address';
   static const String home = '/home';
   static const String control = '/control';
@@ -21,19 +23,21 @@ class Routes {
   static const String delivery = '/delivery';
   static const String orderDetail = '/orderdetail';
   static const String order = '/order';
-  static String getLoginPage() => '$login';
-  static String getSignUpPage() => '$signUp';
-  static String getAddressPage() => '$address';
-  static String gethomePage() => '$home';
-  static String getControlViewPage() => '$control';
-  static String getCartViewPage() => '$cart';
-  static String getSelectTransportPage() => '$transport';
-  static String getSelectDeliveryPage() => '$delivery';
+  static String getLoginPage() => login;
+  static String getSignUpPage() => signUp;
+  static String getCreateUserPage() => createUser;
+  static String getAddressPage() => address;
+  static String gethomePage() => home;
+  static String getControlViewPage() => control;
+  static String getCartViewPage() => cart;
+  static String getSelectTransportPage() => transport;
+  static String getSelectDeliveryPage() => delivery;
   static String getOrderDetailPage(int pageId) => '$orderDetail?pageId=$pageId';
-  static String getOrder() => '$order';
+  static String getOrder() => order;
   static List<GetPage> listRoutes = [
     GetPage(name: login, page: () => const LoginView()),
     GetPage(name: signUp, page: () => const SignUpView()),
+    GetPage(name: createUser, page: () => const CreateUserView()),
     GetPage(name: control, page: () => const ControlView()),
     GetPage(name: address, page: () => const AddressView()),
     GetPage(name: home, page: () => const HomeView()),

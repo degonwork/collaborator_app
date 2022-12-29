@@ -26,39 +26,39 @@ class StorageDatabase {
   }
 
   Future _createDB(Database db, int version) async {
-    final name = 'TEXT NOT NULL';
-    final productName = 'TEXT NOT NULL';
-    final commentsCount = 'INTERGER NOT NULL';
-    final createdAt = 'INTERGER NOT NULL';
-    final code = 'TEXT NOT NULL';
-    final type = 'TEXT NOT NULL';
-    final slug = 'TEXT NOT NULL';
-    final path = 'TEXT NOT NULL';
-    final id = 'INTERGER PRIMARY KEY';
-    final parent_id = 'TEXT NOT NULL';
-    final userId = 'INTERGER NOT NULL';
-    final totalPrice = 'INTERGER NOT NULL';
-    final transportFee = 'INTERGER NOT NULL';
-    final time = 'TEXT NOT NULL';
-    final imageUrls = 'TEXT NOT NULL';
-    final productImage = 'TEXT NOT NULL';
-    final unitPrice = 'INTERGER NOT NULL';
-    final price = 'INTERGER NOT NULL';
-    final stock = 'INTERGER NOT NULL';
-    final updatedAt = 'INTERGER NOT NULL';
-    final productId = 'INTERGER NOT NULL';
-    final orderId = 'INTERGER NOT NULL';
-    final quantity = 'INTERGER NOT NULL';
-    final weight = 'INTERGER NOT NULL';
-    final customerName = 'TEXT NOT NULL';
-    final phoneCustomer = 'TEXT NOT NULL';
-    final addressCustomer = 'TEXT NOT NULL';
-    final transportCode = 'INTERGER NOT NULL';
-    final statusOrder = 'TEXT NOT NULL';
-    final isExisted = 'TEXT NOT NULL';
-    final provinceId = 'TEXT NOT NULL';
-    final districtId = 'TEXT NOT NULL';
-    final wardId = 'TEXT NOT NULL';
+    const name = 'TEXT NOT NULL';
+    const productName = 'TEXT NOT NULL';
+    const commentsCount = 'INTERGER NOT NULL';
+    const createdAt = 'INTERGER NOT NULL';
+    const code = 'TEXT NOT NULL';
+    const type = 'TEXT NOT NULL';
+    const slug = 'TEXT NOT NULL';
+    const path = 'TEXT NOT NULL';
+    const id = 'INTERGER PRIMARY KEY';
+    const parentId = 'TEXT NOT NULL';
+    const userId = 'INTERGER NOT NULL';
+    const totalPrice = 'INTERGER NOT NULL';
+    const transportFee = 'INTERGER NOT NULL';
+    const time = 'TEXT NOT NULL';
+    const imageUrls = 'TEXT NOT NULL';
+    const productImage = 'TEXT NOT NULL';
+    const unitPrice = 'INTERGER NOT NULL';
+    const price = 'INTERGER NOT NULL';
+    const stock = 'INTERGER NOT NULL';
+    const updatedAt = 'INTERGER NOT NULL';
+    const productId = 'INTERGER NOT NULL';
+    const orderId = 'INTERGER NOT NULL';
+    const quantity = 'INTERGER NOT NULL';
+    const weight = 'INTERGER NOT NULL';
+    const customerName = 'TEXT NOT NULL';
+    const phoneCustomer = 'TEXT NOT NULL';
+    const addressCustomer = 'TEXT NOT NULL';
+    const transportCode = 'INTERGER NOT NULL';
+    const statusOrder = 'TEXT NOT NULL';
+    const isExisted = 'TEXT NOT NULL';
+    const provinceId = 'TEXT NOT NULL';
+    const districtId = 'TEXT NOT NULL';
+    const wardId = 'TEXT NOT NULL';
 
     await db.execute('''
 CREATE TABLE $tableProvinces(
@@ -74,7 +74,7 @@ CREATE TABLE $tableDistrict(
   ${DistrictField.type} $type,
   ${DistrictField.slug} $slug,
   ${DistrictField.path} $path,
-  ${DistrictField.parent_id} $parent_id
+  ${DistrictField.parentId} $parentId
   )''');
     await db.execute('''
 CREATE TABLE $tableWard(
@@ -83,7 +83,7 @@ CREATE TABLE $tableWard(
   ${WardField.type} $type,
   ${WardField.slug} $slug,
   ${WardField.path} $path,
-  ${WardField.parent_id} $parent_id
+  ${WardField.parentId} $parentId
   )''');
     await db.execute('''
 CREATE TABLE $tableProduct(
@@ -128,6 +128,7 @@ CREATE TABLE $tableOrder(
   ${OrderField.transportCode} $transportCode,
   ${OrderField.statusOrder} $statusOrder
   )''');
+  
   }
 
   // Province
@@ -143,14 +144,14 @@ CREATE TABLE $tableOrder(
 
   Future<Province?> readProvinceByIDFromDB(String? id) async {
     final db = await instance.database;
-    final maps = await db.query(
+    final map = await db.query(
       tableProvinces,
       columns: ProvinceField.values,
       where: '${ProvinceField.provinceId} = ?',
       whereArgs: [id],
     );
-    if (maps.isNotEmpty) {
-      return Province.fromJson(maps.first);
+    if (map.isNotEmpty) {
+      return Province.fromJson(map.first);
     } else {
       return null;
     }
@@ -228,7 +229,7 @@ CREATE TABLE $tableOrder(
     final results = await db.query(
       tableDistrict,
       columns: DistrictField.values,
-      where: '${DistrictField.parent_id} = ?',
+      where: '${DistrictField.parentId} = ?',
       whereArgs: [provinceID],
     );
     if (results.isNotEmpty) {
@@ -283,7 +284,7 @@ CREATE TABLE $tableOrder(
     final db = await instance.database;
     final results = await db.query(tableWard,
         columns: WardField.values,
-        where: '${WardField.parent_id} = ?',
+        where: '${WardField.parentId} = ?',
         whereArgs: [districtId]);
     if (results.isNotEmpty) {
       return results.map((json) => Ward.fromJson(json)).toList();
@@ -396,7 +397,7 @@ CREATE TABLE $tableOrder(
 
   Future<void> updateCartToDB(Cart cart) async {
     final db = await instance.database;
-    final map = await db.update(
+     await db.update(
       tableCart,
       cart.toJson(),
       where: '${CartField.id} = ?',

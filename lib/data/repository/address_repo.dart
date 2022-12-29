@@ -7,13 +7,11 @@ class AddressRepo {
   // Provinces
   Future<void> createProvincesToDB({List<Province>? provinces}) async {
     for (int i = 0; i < provinces!.length; i++) {
-      if (provinces[i] is Province) {
         Province? province;
         province = await readProvinceByIDFromDB(id: provinces[i].provinceId);
         if (province == null) {
           await StorageDatabase.instance.createProvinceToDB(provinces[i]);
         }
-      }
     }
   }
 
@@ -38,13 +36,11 @@ class AddressRepo {
   // District
   Future<void> createDistrictToDB({List<District>? districts}) async {
     for (int i = 0; i < districts!.length; i++) {
-      if (districts[i] is District) {
         District? district;
         district = await readDistrictByIDFromDB(id: districts[i].districtId);
         if (district == null) {
           await StorageDatabase.instance.createDistrictToDB(districts[i]);
         }
-      }
     }
   }
 
@@ -70,13 +66,11 @@ class AddressRepo {
   // Ward
   Future<void> createWardToDB({List<Ward>? wards}) async {
     for (int i = 0; i < wards!.length; i++) {
-      if (wards[i] is Ward) {
         Ward? ward;
         ward = await readWardByIDFromDB(id: wards[i].wardId);
         if (ward == null) {
           await StorageDatabase.instance.createWardToDB(wards[i]);
         }
-      }
     }
   }
 

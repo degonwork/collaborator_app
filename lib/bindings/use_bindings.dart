@@ -5,10 +5,12 @@ import '../controller/order_controller.dart';
 import '../data/repository/cart_repo.dart';
 import '../data/repository/order_repo.dart';
 
-void dependencies() {
-  Get.lazyPut(() => CartRepo(), fenix: true);
-  Get.lazyPut(() => CartController(cartRepo: Get.find()));
+Future<void> dependencies() async {
   Get.lazyPut(() => OrderRepo(apiGHTK: Get.find()), fenix: true);
-  Get.lazyPut(() => OrderController(orderRepo: Get.find()));
+  Get.lazyPut(() => CartRepo(), fenix: true);
+  Get.lazyPut(
+      () => CartController(cartRepo: Get.find(), productRepo: Get.find()));
+  Get.lazyPut(
+      () => OrderController(orderRepo: Get.find(), cartRepo: Get.find()));
   Get.lazyPut(() => ControlViewController());
 }

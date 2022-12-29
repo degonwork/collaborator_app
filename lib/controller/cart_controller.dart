@@ -1,15 +1,15 @@
 import 'package:collaborator_app/controller/order_controller.dart';
-import 'package:collaborator_app/controller/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../data/model/cart.dart';
 import '../data/model/order.dart';
 import '../data/model/product.dart';
 import '../data/repository/cart_repo.dart';
+import '../data/repository/product_repo.dart';
 
 class CartController extends GetxController {
   final CartRepo cartRepo;
+  final ProductRepo productRepo;
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
@@ -28,6 +28,7 @@ class CartController extends GetxController {
 
   CartController({
     required this.cartRepo,
+    required this.productRepo,
   });
 
   Future<bool> addToCart(Product product) async {
@@ -45,7 +46,7 @@ class CartController extends GetxController {
           return false;
         } else {
           _carts![i].quantity += 1;
-          await updateCartToDB(_carts![i]);
+          await cartRepo.updateCartToDB(_carts![i]);
           await getTotalWeight(_carts);
           getTotalPrice(_carts);
           return true;
@@ -81,11 +82,7 @@ class CartController extends GetxController {
     return true;
   }
 
-  Future<List<Cart>?> readAllCartByOrderIdFromDB(int orderId) async {
-    return await cartRepo.readAllCartByOrderIdFromDB(orderId);
-  }
-
-  Future<List<Cart>?> readAllCartIsNotExitedFromDB() async {
+  Future<List<Cart>?> readAllCartIsNotExistedFromDB() async {
     _isLoading = true;
     _carts = [];
     _carts = await cartRepo.readAllCartIsNotExistedFromDB();
@@ -99,10 +96,6 @@ class CartController extends GetxController {
     return _carts;
   }
 
-  Future<void> updateCartToDB(Cart cart) async {
-    await cartRepo.updateCartToDB(cart);
-  }
-
   void getTotalPrice(List<Cart>? carts) {
     _subTotalPrice = 0;
     for (var element in carts!) {
@@ -114,16 +107,16 @@ class CartController extends GetxController {
   Future<void> getTotalWeight(List<Cart>? carts) async {
     _totalWeight = 0;
     for (var element in carts!) {
-      Product? product = await Get.find<ProductController>()
-          .readProductByIdFromDB(element.productId);
+      Product? product =
+          await productRepo.readProductByIDFromDB(id: element.productId);
       _totalWeight += product!.weight! * element.quantity;
     }
     update();
   }
 
   Future<void> increment(int index) async {
-    Product? product = await Get.find<ProductController>()
-        .readProductByIdFromDB(_carts![index].productId);
+    Product? product =
+        await productRepo.readProductByIDFromDB(id: _carts![index].productId);
     if (_carts![index].quantity == product!.stock) {
       Get.snackbar(
         "Can't add",
@@ -135,14 +128,14 @@ class CartController extends GetxController {
     }
     _carts![index].quantity += 1;
     _subTotalPrice += _carts![index].unitPrice!;
-    await updateCartToDB(_carts![index]);
+    await cartRepo.updateCartToDB(_carts![index]);
     _totalWeight += product.weight!;
     update();
   }
 
   Future<void> decrement(int index) async {
-    Product? product = await Get.find<ProductController>()
-        .readProductByIdFromDB(_carts![index].productId);
+    Product? product =
+        await productRepo.readProductByIDFromDB(id: _carts![index].productId);
     _carts![index].quantity -= 1;
     _subTotalPrice -= _carts![index].unitPrice!;
     _totalWeight -= product!.weight!;
@@ -151,7 +144,7 @@ class CartController extends GetxController {
       _carts!.removeAt(index);
       print("Delete product");
     } else {
-      await updateCartToDB(_carts![index]);
+      await cartRepo.updateCartToDB(_carts![index]);
     }
     update();
   }

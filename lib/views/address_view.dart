@@ -9,20 +9,20 @@ class AddressView extends StatelessWidget {
   const AddressView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    TextEditingController _provinceController = TextEditingController();
-    TextEditingController _districtController = TextEditingController();
-    TextEditingController _wardController = TextEditingController();
-    TextEditingController _villageController = TextEditingController();
+    TextEditingController provinceController = TextEditingController();
+    TextEditingController districtController = TextEditingController();
+    TextEditingController wardController = TextEditingController();
+    TextEditingController villageController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               SelectAddress(
-                provinceController: _provinceController,
-                districtController: _districtController,
-                wardController: _wardController,
-                villageController: _villageController,
+                provinceController: provinceController,
+                districtController: districtController,
+                wardController: wardController,
+                villageController: villageController,
               ),
               const SizedBox(height: 40),
               GetBuilder<AddressController>(builder: (addressController) {
@@ -42,7 +42,7 @@ class AddressView extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        if (_provinceController.text.trim().isEmpty) {
+                        if (provinceController.text.trim().isEmpty) {
                           Get.snackbar(
                               AppLocalizations.of(context)!
                                   .notSelectProvinceOne,
@@ -50,7 +50,7 @@ class AddressView extends StatelessWidget {
                                   .notSelectProvinceTwo,
                               backgroundColor: Colors.red,
                               colorText: Colors.white);
-                        } else if (_districtController.text.trim().isEmpty) {
+                        } else if (districtController.text.trim().isEmpty) {
                           Get.snackbar(
                               AppLocalizations.of(context)!
                                   .notSelectDistrictOne,
@@ -58,13 +58,13 @@ class AddressView extends StatelessWidget {
                                   .notSelectDistrictTwo,
                               backgroundColor: Colors.red,
                               colorText: Colors.white);
-                        } else if (_wardController.text.trim().isEmpty) {
+                        } else if (wardController.text.trim().isEmpty) {
                           Get.snackbar(
                               AppLocalizations.of(context)!.notSelectWardOne,
                               AppLocalizations.of(context)!.notSelectWardTwo,
                               backgroundColor: Colors.red,
                               colorText: Colors.white);
-                        } else if (_villageController.text.trim().isEmpty) {
+                        } else if (villageController.text.trim().isEmpty) {
                           Get.snackbar(
                               AppLocalizations.of(context)!.notSelectVillageOne,
                               AppLocalizations.of(context)!.notSelectVillageOne,
@@ -77,10 +77,10 @@ class AddressView extends StatelessWidget {
                             backgroundColor: Colors.red,
                             colorText: Colors.white,
                           );
-                          _provinceController.text = "";
-                          _districtController.text = "";
-                          _wardController.text = "";
-                          _villageController.text = "";
+                          provinceController.text = "";
+                          districtController.text = "";
+                          wardController.text = "";
+                          villageController.text = "";
                           addressController.isEnableDistrictText = false;
                           addressController.isEnableWardText = false;
                           addressController.isEnableVillageText = false;
@@ -91,9 +91,9 @@ class AddressView extends StatelessWidget {
                             backgroundColor: Colors.red,
                             colorText: Colors.white,
                           );
-                          _districtController.text = "";
-                          _wardController.text = "";
-                          _villageController.text = "";
+                          districtController.text = "";
+                          wardController.text = "";
+                          villageController.text = "";
                           addressController.isEnableWardText = false;
                           addressController.isEnableVillageText = false;
                         } else if (addressController.wardType == null) {
@@ -103,15 +103,15 @@ class AddressView extends StatelessWidget {
                             backgroundColor: Colors.red,
                             colorText: Colors.white,
                           );
-                          _wardController.text = "";
-                          _villageController.text = "";
+                          wardController.text = "";
+                          villageController.text = "";
                           addressController.isEnableVillageText = false;
                         } else {
-                          String addressString = "${_villageController.text}, "
-                              "${addressController.wardType} ${_wardController.text}, "
-                              "${addressController.districtType} ${_districtController.text}, "
-                              "${addressController.provinceType} ${_provinceController.text}";
-                          print("Address is: " + addressString);
+                          String addressString = "${villageController.text}, "
+                              "${addressController.wardType} ${wardController.text}, "
+                              "${addressController.districtType} ${districtController.text}, "
+                              "${addressController.provinceType} ${provinceController.text}";
+                          print("Address is:  + $addressString");
                         }
                       },
                       child: Text(AppLocalizations.of(context)!.agreeButton),

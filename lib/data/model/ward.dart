@@ -1,4 +1,4 @@
-final String tableWard = 'ward';
+const String tableWard = 'ward';
 
 class WardField {
   static final List<String> values = [
@@ -7,14 +7,14 @@ class WardField {
     slug,
     path,
     wardId,
-    parent_id
+    parentId,
   ];
-  static final String name = 'name';
-  static final String type = 'type';
-  static final String slug = 'slug';
-  static final String path = 'path';
-  static final String wardId = 'wardId';
-  static final String parent_id = 'parent_id';
+  static const String name = 'name';
+  static const String type = 'type';
+  static const String slug = 'slug';
+  static const String path = 'path';
+  static const String wardId = 'wardId';
+  static const String parentId = 'parentId';
 }
 
 class Ward {
@@ -24,7 +24,7 @@ class Ward {
     required this.slug,
     required this.path,
     required this.wardId,
-    required this.parent_id,
+    required this.parentId,
   });
 
   final String? name;
@@ -32,7 +32,7 @@ class Ward {
   final String? slug;
   final String? path;
   final String? wardId;
-  final String? parent_id;
+  final String? parentId;
 
   static Ward fromJson(Map<String, dynamic> json) => Ward(
         name: json["name"],
@@ -40,7 +40,7 @@ class Ward {
         slug: json["slug"],
         path: json["path"],
         wardId: json["code"] ?? json["wardId"],
-        parent_id: json["parent_code"] ?? json["parent_id"],
+        parentId: json["parent_code"] ?? json["parentId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +49,7 @@ class Ward {
         "slug": slug,
         "path": path,
         "wardId": wardId,
-        "parent_id": parent_id,
+        "parentId": parentId,
       };
 }
 
@@ -72,9 +72,8 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+
     return reverseMap!;
   }
 }

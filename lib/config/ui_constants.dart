@@ -47,3 +47,7 @@ const List<Color> lightBackgroundaGradient = [
   Color.fromARGB(255, 200, 228, 218),
 ];
 const double kAppBarHeight = 80;
+const kTextTitleStyle = TextStyle(
+  fontWeight: FontWeight.w600,
+);
+const kDarkPrimaryColor = Color(0xFF212121);
