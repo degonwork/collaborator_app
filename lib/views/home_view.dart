@@ -20,14 +20,14 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.offset) {
-        Get.find<ProductController>().isFilter
-            ? null
-            : Get.find<ProductController>().scrollProduct();
-      }
-    });
+    // scrollController.addListener(() {
+    //   if (scrollController.position.maxScrollExtent ==
+    //       scrollController.offset) {
+    //     Get.find<ProductController>().isFilter
+    //         ? null
+    //         : Get.find<ProductController>().scrollProduct();
+    //   }
+    // });
   }
 
   @override
@@ -95,10 +95,13 @@ class _HomeViewState extends State<HomeView> {
                               removeTop: true,
                               child: ListView.builder(
                                 controller: scrollController,
-                                itemCount: (productController.isFilter ||
-                                        productController.isNotHasData)
-                                    ? productController.products.length
-                                    : productController.products.length + 1,
+                                itemCount:
+                                    // (
+                                    // productController.isFilter ||
+                                    //       productController.isNotHasData)
+                                    // ?
+                                    productController.products.length,
+                                // : productController.products.length + 1,
                                 itemBuilder: (context, index) {
                                   if (index <
                                       productController.products.length) {

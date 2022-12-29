@@ -10,7 +10,7 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<CartController>().readAllCartIsNotExitedFromDB();
+    Get.find<CartController>().readAllCartIsNotExistedFromDB();
     return Scaffold(
       appBar: AppBar(
         title: Center(

@@ -13,15 +13,15 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  AuthController loginController = Get.find<AuthController>();
+  AuthController authController = Get.find<AuthController>();
 
-  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    nameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -132,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
-                  controller: nameController,
+                  controller: emailController,
                   // The validator receives the text that the user has entered.
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -206,7 +206,7 @@ class _LoginViewState extends State<LoginView> {
                 GestureDetector(
                   onTap: () {
                     Get.toNamed(Routes.signUp);
-                    nameController.clear();
+                    emailController.clear();
                     passwordController.clear();
                     _formKey.currentState?.reset();
                     authController.isObscure = true;
@@ -249,7 +249,8 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
         onPressed: () async {
-          Get.find<AuthController>().login(nameController.text, passwordController.text);
+          authController.login(emailController.text.toString(),
+              passwordController.text.toString());
           Get.offAllNamed(Routes.getControlViewPage());
         },
         child: Text(AppLocalizations.of(context)!.login),

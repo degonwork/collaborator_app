@@ -10,8 +10,7 @@ import 'l10n/l10n.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await start_bindings.dependencies();
- 
+  await start_bindings.dependencies();
   runApp(const MyApp());
 }
 

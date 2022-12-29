@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:get/get.dart';
-
 import '../data/model/district.dart';
 import '../data/model/province.dart';
 import '../data/model/ward.dart';

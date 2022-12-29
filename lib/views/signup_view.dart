@@ -1,3 +1,4 @@
+import 'package:collaborator_app/views/create_user_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/auth_controller.dart';
@@ -115,29 +116,29 @@ class _SignUpViewState extends State<SignUpView> {
             child: Column(
               children: [
                 /// username
-                TextFormField(
-                  style: kTextFormFieldStyle(),
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.person),
-                    hintText: AppLocalizations.of(context)!.username,
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                    ),
-                  ),
+                // TextFormField(
+                //   style: kTextFormFieldStyle(),
+                //   decoration: InputDecoration(
+                //     prefixIcon: const Icon(Icons.person),
+                //     hintText: AppLocalizations.of(context)!.username,
+                //     border: const OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(15)),
+                //     ),
+                //   ),
 
-                  controller: nameController,
-                  // The validator receives the text that the user has entered.
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.blankUserName;
-                    } else if (value.length < 4) {
-                      return AppLocalizations.of(context)!.validMinCharacter;
-                    } else if (value.length > 13) {
-                      return AppLocalizations.of(context)!.validMaxCharacter;
-                    }
-                    return null;
-                  },
-                ),
+                //   controller: nameController,
+                //   // The validator receives the text that the user has entered.
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return AppLocalizations.of(context)!.blankUserName;
+                //     } else if (value.length < 4) {
+                //       return AppLocalizations.of(context)!.validMinCharacter;
+                //     } else if (value.length > 13) {
+                //       return AppLocalizations.of(context)!.validMaxCharacter;
+                //     }
+                //     return null;
+                //   },
+                // ),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
@@ -224,7 +225,7 @@ class _SignUpViewState extends State<SignUpView> {
                 GestureDetector(
                   onTap: () {
                     Get.toNamed(Routes.login);
-                    nameController.clear();
+                    // nameController.clear();
                     emailController.clear();
                     passwordController.clear();
                     _formKey.currentState?.reset();
@@ -266,10 +267,12 @@ class _SignUpViewState extends State<SignUpView> {
           ),
         ),
         onPressed: () {
+          authController.signUp(emailController.text, passwordController.text);
+          Get.off(() => const CreateUserView());
           // Validate returns true if the form is valid, or false otherwise.
-          if (_formKey.currentState!.validate()) {
-            // ... Navigate To your Home Page
-          }
+          // if (_formKey.currentState!.validate()) {
+          //   // ... Navigate To your Home Page
+          // }
         },
         child: Text(AppLocalizations.of(context)!.signUp),
       ),

@@ -32,24 +32,28 @@ class ProductController extends GetxController {
   Future<List<Product>> getProducts({required String? page}) async {
     List<Product> listProducts = [];
     Response response = await productRepo.getProducts(
-        pageQuery: {"page": page, "page_size": AppConstants.page_size});
-    if (response.statusCode == 200) {
-      Map<String, dynamic> result =
-          Map<String, dynamic>.from(jsonDecode(jsonEncode(response.body)));
-      if (result["success"] == true) {
-        print("got products");
-        _nextPage = result['page_meta']['next_page_number'].toString();
-        if (result['page_meta']['has_next_page'] == false) {
-          _isNotHasData = true;
-        }
-        for (var element in result["products"]) {
-          listProducts.add(Product.fromJson(element));
-        }
-      } else {
-        print("Not got products");
-      }
-    } else {
-      print("error");
+        pageQuery: {"page": page, "page_size": AppConstants.pageSize});
+    // if (response.statusCode == 200) {
+    // Map<String, dynamic> result =
+    //     Map<String, dynamic>.from(jsonDecode(jsonEncode(response.body)));
+    List<dynamic> result =
+        List<dynamic>.from(jsonDecode(jsonEncode(response.body)));
+    // if (result["success"] == true) {
+    //   print("got products");
+    //   _nextPage = result['page_meta']['next_page_number'].toString();
+    //   if (result['page_meta']['has_next_page'] == false) {
+    //     _isNotHasData = true;
+    //   }
+    // for (var element in result["products"]) {
+    //   listProducts.add(Product.fromJson(element));
+    for (var element in result) {
+      listProducts.add(Product.fromJson(element));
+      // }
+      // } else {
+      //   print("Not got products");
+      // }
+      // } else {
+      //   print("error");
     }
     return listProducts;
   }
@@ -62,22 +66,12 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<Product?> readProductByIdFromDB(int? id) async {
-    Product? product = await productRepo.readProductByIDFromDB(id: id);
-    if (product != null) {
-      return product;
-    } else {
-      return null;
-    }
-  }
-
   Future<void> readAllProductFromDB({String? nextPage}) async {
     _isLoading = true;
     List<Product>? listProducts = await productRepo.readAllProductFromDB();
     listProducts != null
         ? _currentPage =
-            (listProducts.length ~/ int.parse(AppConstants.page_size))
-                .toString()
+            (listProducts.length ~/ int.parse(AppConstants.pageSize)).toString()
         : _currentPage = "1";
     await createProductToDB(page: nextPage ?? _currentPage);
     List<Product>? storageProducts = await productRepo.readAllProductFromDB();

@@ -1,12 +1,12 @@
-final String tableCategory = 'categories';
+const String tableCategory = 'categories';
 
 class CategoryField {
   static final List<String> values = [
     id,
     name,
   ];
-  static final String id = 'id';
-  static final String name = 'name';
+  static const String id = 'id';
+  static const String name = 'name';
 }
 
 class Category {
