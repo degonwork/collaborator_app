@@ -1,3 +1,5 @@
+import 'package:collaborator_app/controller/auth_controller.dart';
+import 'package:collaborator_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../config/ui_constants.dart';
@@ -10,7 +12,7 @@ class ControlView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     use_bindings.dependencies();
-    return Scaffold(
+  return  GetBuilder<AuthController>(builder:(authController) => authController.userLoggedIn() ? Scaffold(
       body: GetBuilder<ControlViewController>(
         builder: (controlViewController) => controlViewController.currentScreen,
       ),
@@ -50,6 +52,7 @@ class ControlView extends StatelessWidget {
           ),
         ),
       ),
+    ) : const LoginView()
     );
   }
 }

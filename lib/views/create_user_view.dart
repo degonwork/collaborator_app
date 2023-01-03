@@ -1,4 +1,7 @@
 import 'package:collaborator_app/controller/auth_controller.dart';
+import 'package:collaborator_app/routes/routes.dart';
+// import 'package:collaborator_app/views/controller_view.dart';
+// import 'package:collaborator_app/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -73,6 +76,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                         ElevatedButton(
                           onPressed: (){
                             authController.createInforUser(nameController.text,jobController.text);
+                            Get.offAllNamed(Routes.getControlViewPage());
                           },
                           child: const Center(
                             child: Text('Hoàn thành'),

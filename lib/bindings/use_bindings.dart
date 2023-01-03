@@ -1,5 +1,6 @@
 
 import 'package:collaborator_app/controller/auth_controller.dart';
+import 'package:collaborator_app/controller/user_controller.dart';
 import 'package:get/get.dart';
 
 import '../controller/cart_controller.dart';
@@ -13,7 +14,7 @@ void dependencies() {
   Get.lazyPut(() => CartRepo(), fenix: true);
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
+  Get.lazyPut(() => UserController());
   Get.lazyPut(() => OrderController(orderRepo: Get.find()));
   Get.lazyPut(() => ControlViewController());
-  
 }

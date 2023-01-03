@@ -1,4 +1,4 @@
-import 'package:collaborator_app/controller/auth_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../views/cart_view.dart';
@@ -28,5 +28,6 @@ class ControlViewController extends GetxController {
         break;
     }
     update();
+   
   }
 }

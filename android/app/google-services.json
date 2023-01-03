@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "324371651091",
+    "project_id": "collaborator-app-f035c",
+    "storage_bucket": "collaborator-app-f035c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324371651091:android:9ed969f53785de8083fde6",
+        "android_client_info": {
+          "package_name": "com.example.collaborator_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324371651091-dfvvhcd6q9o7boaukcpshtd77uevb61f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDB7EsGoejoyJf8CRfDIbx4ueDpw69sAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324371651091-dfvvhcd6q9o7boaukcpshtd77uevb61f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "324371651091-8a8g57f1f60lgcdd47e18o41n1e9fvee.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.collaboratorApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

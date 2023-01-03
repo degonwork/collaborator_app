@@ -1,6 +1,10 @@
+import 'package:collaborator_app/main.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import '../config/ui_constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,7 +20,15 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final scrollController = ScrollController();
-
+//  void showDialog(){
+//    Get.dialog(AlertDialog(
+//     title: const Text('Notification'),
+//     content: const Text('This is notifications from firebase'),
+//     actions: [
+//       TextButton(onPressed: ()=> Get.back(), child:const Text('Close'))
+//     ],
+//   ));
+// }
   @override
   void initState() {
     super.initState();
@@ -28,6 +40,20 @@ class _HomeViewState extends State<HomeView> {
             : Get.find<ProductController>().scrollProduct();
       }
     });
+//  void showNotification() {
+
+//     flutterLocalNotificationsPlugin.show(
+//         0,
+//         "Testing",
+//         "How you doin ?",
+//         NotificationDetails(
+//             android: AndroidNotificationDetails(channel.id, channel.name,
+//                 channelDescription: channel.description,
+//                 importance: Importance.high,
+//                 color: Colors.blue,
+//                 playSound: true,
+//                 icon: '@mipmap/ic_launcher')));
+//   }
   }
 
   @override
@@ -43,42 +69,82 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 40, left: 18, right: 18),
-            child: GetBuilder<ProductController>(
-              builder: (productController) => TextField(
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.textfieldSearch,
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(7),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(7),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 1,
+          Container(
+            padding: const EdgeInsets.only(left: 18, right: 18),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40, right: 10),
+                    child: GetBuilder<ProductController>(
+                      builder: (productController) => TextField(
+                        decoration: InputDecoration(
+                          hintText:
+                              AppLocalizations.of(context)!.textfieldSearch,
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(7),
+                            borderSide: const BorderSide(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(7),
+                            borderSide: const BorderSide(
+                              color: Colors.grey,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                        onChanged: (value) async {
+                          await Get.find<ProductController>()
+                              .filterProduct(value);
+                          if (scrollController.hasClients) {
+                            scrollController.jumpTo(0.0);
+                          }
+                          if (value.isEmpty) {
+                            await productController.noFilterProduct();
+                            if (scrollController.hasClients) {
+                              scrollController.jumpTo(0.0);
+                            }
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),
-                onChanged: (value) async {
-                  await Get.find<ProductController>().filterProduct(value);
-                  if (scrollController.hasClients) {
-                    scrollController.jumpTo(0.0);
-                  }
-                  if (value.isEmpty) {
-                    await productController.noFilterProduct();
-                    if (scrollController.hasClients) {
-                      scrollController.jumpTo(0.0);
-                    }
-                  }
-                },
-              ),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 20, right: 20),
+                      width: 40,
+                      height: 40,
+                      child: IconButton(
+                        onPressed: () {
+                          // flutterLocalNotificationsPlugin.show(
+                          //   0, 'Testing', 'How old are you ?', NotificationDetails(
+                          //     android: AndroidNotificationDetails(
+                          //       channel.id,
+                          //       channel.name,
+                          //       channelDescription: channel.description,
+                          //       importance: Importance.high,
+                          //       color: Colors.blue,
+                          //       playSound: true,
+                          //       icon: '@mipmap/ic_launcher',
+                          //       ),
+
+                          //   ),
+                          //   );
+                        },
+                        icon: const Icon(LineAwesomeIcons.bell),
+                        iconSize: 30,
+                        color: Colors.blue,
+                      ),
+                    ))
+              ],
             ),
           ),
           const SizedBox(height: 20),

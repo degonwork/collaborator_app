@@ -1,4 +1,4 @@
-import 'package:collaborator_app/views/create_user_view.dart';
+// import 'package:collaborator_app/views/create_user_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/auth_controller.dart';
@@ -268,11 +268,8 @@ class _SignUpViewState extends State<SignUpView> {
         ),
         onPressed: () {
           authController.signUp(emailController.text, passwordController.text);
-          Get.off(() =>  const CreateUserView());
-          // Validate returns true if the form is valid, or false otherwise.
-          // if (_formKey.currentState!.validate()) {
-          //   // ... Navigate To your Home Page
-          // }
+          Get.off((Routes.createUser));
+          
         },
         child: Text(AppLocalizations.of(context)!.signUp),
       ),
